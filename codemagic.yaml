@@ -25,6 +25,9 @@ workflows:
       - build/linux/arm64/release/bundle/** # ARM64 build output
     publishing:
       # script: echo "Built Linux app for $TARGET_ARCH"
+      email:
+        recipients:
+          - idileepd@gmail.com
 
   build_arm64:
     extends: build_linux
