@@ -42,12 +42,24 @@ jobs:
               libstdc++-12-dev
 
       - run:
-          name: Install Flutter SDK
+          name: Install Flutter SDK for ARM64
           command: |
-            curl -LO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.0-stable.tar.xz
-            tar -xf flutter_linux_3.24.0-stable.tar.xz
+            FLUTTER_VERSION="3.24.0"
+            wget -O flutter.tar.xz "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}-stable.tar.xz"
+            tar xf flutter.tar.xz
             echo 'export PATH="$HOME/project/flutter/bin:$PATH"' >> $BASH_ENV
             source $BASH_ENV
+
+            # Download Dart SDK for ARM64
+            DART_VERSION="3.5.0"
+            wget -O dart-sdk.zip "https://storage.googleapis.com/dart-archive/channels/stable/release/${DART_VERSION}/sdk/dartsdk-linux-arm64-release.zip"
+            unzip dart-sdk.zip -d flutter/bin/cache/
+            mv flutter/bin/cache/dart-sdk flutter/bin/cache/dart-sdk-arm64
+
+            # Use ARM64 Dart SDK
+            echo 'export DART_SDK="$HOME/project/flutter/bin/cache/dart-sdk-arm64"' >> $BASH_ENV
+            source $BASH_ENV
+
             flutter --version
 
       - run:
