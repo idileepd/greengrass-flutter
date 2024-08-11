@@ -20,19 +20,23 @@ jobs:
       - run:
           name: Install Basic Dependencies
           command: |
-            sudo apt-get update -y && sudo apt-get upgrade -y
+            sudo apt-get update -y
             sudo apt-get install -y \
               curl \
               git \
               unzip \
               xz-utils \
               zip \
+
+      - run:
+          name: Install MEsa Dependencies
+          command: |
+            sudo apt-get install -y \
               libglu1-mesa
 
       - run:
           name: Install Build Dependencies
           command: |
-            sudo apt-get update -y && sudo apt-get upgrade -y
             sudo apt-get install -y \
               clang cmake git \
               ninja-build pkg-config \
