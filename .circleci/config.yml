@@ -45,9 +45,12 @@ jobs:
           name: Install Flutter SDK
           command: |
             curl -LO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.0-stable.tar.xz
-            tar -xf flutter_linux_3.24.0-stable.tar.xz -C $PWD/flutter
-            echo 'export PATH="$PWD/flutter/flutter/bin:$PATH"' >> $BASH_ENV
-            source $BASH_ENV
+            tar -xf flutter_linux_3.24.0-stable.tar.xz
+            pwd
+            ls -a
+            echo "$PWD/flutter/bin:$PATH"
+            echo 'export PATH="$PWD/flutter/bin:$PATH"' >>  ~/.bash_profile
+            # source $BASH_ENV
             flutter doctor
 
       - run:
