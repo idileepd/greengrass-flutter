@@ -12,6 +12,11 @@ jobs:
     steps:
       - checkout
 
+      - run:
+          name: Create Flutter version file
+          command: |
+            echo "3.24.0" > flutter_version.txt
+
       - restore_cache:
           keys:
             - flutter-sdk-{{ checksum "flutter_version.txt" }}
@@ -36,8 +41,7 @@ jobs:
       - run:
           name: Install Flutter SDK for ARM64
           command: |
-            FLUTTER_VERSION="3.24.0"
-            echo $FLUTTER_VERSION > flutter_version.txt
+            FLUTTER_VERSION=$(cat flutter_version.txt)
             if [ ! -d "flutter" ]; then
               git clone https://github.com/flutter/flutter.git -b stable
               cd flutter
