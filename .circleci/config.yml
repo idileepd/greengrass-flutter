@@ -66,9 +66,15 @@ jobs:
           command: |
             flutter build linux --release --target-platform=linux-arm64
 
+      - run:
+          name: Zip build artifacts
+          command: |
+            cd build/linux/arm64/release/bundle
+            zip -r ../../../../../build_artifacts.zip .
+
       - store_artifacts:
-          path: build/linux/arm64/release/bundle
-          destination: build-output
+          path: build_artifacts.zip
+          destination: build_artifacts.zip
 
 workflows:
   version: 2
