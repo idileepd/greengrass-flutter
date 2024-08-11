@@ -13,6 +13,9 @@ jobs:
     executor: arm64
     steps:
       - checkout
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+      - run: pwd
 
       - run:
           name: Install Basic Dependencies
@@ -24,13 +27,16 @@ jobs:
               unzip \
               xz-utils \
               zip \
-              libglu1-mesa \
-              clang \
-              cmake \
-              ninja-build \
-              pkg-config \
-              libgtk-3-dev \
-              liblzma-dev \
+              libglu1-mesa
+
+      - run:
+          name: Install Build Dependencies
+          command: |
+            sudo apt-get update -y && sudo apt-get upgrade -y
+            sudo apt-get install -y \
+              clang cmake git \
+              ninja-build pkg-config \
+              libgtk-3-dev liblzma-dev \
               libstdc++-12-dev
 
       - run:
