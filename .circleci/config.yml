@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Install Flutter SDK for ARM64
           command: |
-            FLUTTER_VERSION="3.13.9"
+            FLUTTER_VERSION="3.24.0"
             echo $FLUTTER_VERSION > flutter_version.txt
             if [ ! -d "flutter" ]; then
               git clone https://github.com/flutter/flutter.git -b stable
