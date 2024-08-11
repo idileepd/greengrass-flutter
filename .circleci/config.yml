@@ -53,11 +53,15 @@ jobs:
             # Download Dart SDK for ARM64
             DART_VERSION="3.5.0"
             wget -O dart-sdk.zip "https://storage.googleapis.com/dart-archive/channels/stable/release/${DART_VERSION}/sdk/dartsdk-linux-arm64-release.zip"
-            unzip dart-sdk.zip -d flutter/bin/cache/
-            mv flutter/bin/cache/dart-sdk flutter/bin/cache/dart-sdk-arm64
+
+            # Remove existing dart-sdk directory if it exists
+            rm -rf flutter/bin/cache/dart-sdk
+
+            # Unzip Dart SDK without prompting
+            unzip -o dart-sdk.zip -d flutter/bin/cache/
 
             # Use ARM64 Dart SDK
-            echo 'export DART_SDK="$HOME/project/flutter/bin/cache/dart-sdk-arm64"' >> $BASH_ENV
+            echo 'export DART_SDK="$HOME/project/flutter/bin/cache/dart-sdk"' >> $BASH_ENV
             source $BASH_ENV
 
             flutter --version
