@@ -29,8 +29,8 @@ workflows:
         recipients:
           - idileepd@gmail.com
 
-  build_arm64:
-    extends: build_linux
-    environment:
-      vars:
-        TARGET_ARCH: aarch64
+  # build_arm64:
+  #   extends: build_linux
+  #   environment:
+  #     vars:
+  #       TARGET_ARCH: aarch64
