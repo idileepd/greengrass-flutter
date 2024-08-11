@@ -24,7 +24,7 @@ workflows:
       - build/linux/x64/release/bundle/** # x64 build output
       - build/linux/arm64/release/bundle/** # ARM64 build output
     publishing:
-      script: echo "Built Linux app for $TARGET_ARCH"
+      # script: echo "Built Linux app for $TARGET_ARCH"
 
   build_arm64:
     extends: build_linux
