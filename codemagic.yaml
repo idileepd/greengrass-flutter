@@ -1,0 +1,33 @@
+workflows:
+  build_linux:
+    name: Build for Linux
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      vars:
+        # Define environment variables for the target platforms
+        # TARGET_ARCH: x86_64 # Change to aarch64 for ARM 64-bit
+        TARGET_ARCH: aarch64 # Change to aarch64 for ARM 64-bit
+    scripts:
+      - name: Install dependencies
+        script: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build libgtk-3-dev
+      - name: Build Flutter app for Linux
+        script: |
+          if [ "$TARGET_ARCH" == "aarch64" ]; then
+            flutter build linux --release --target-platform=linux-arm64
+          else
+            flutter build linux --release
+          fi
+    artifacts:
+      - build/linux/x64/release/bundle/** # x64 build output
+      - build/linux/arm64/release/bundle/** # ARM64 build output
+    publishing:
+      script: echo "Built Linux app for $TARGET_ARCH"
+
+  build_arm64:
+    extends: build_linux
+    environment:
+      vars:
+        TARGET_ARCH: aarch64
