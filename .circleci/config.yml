@@ -3,11 +3,9 @@ version: 2.1
 executors:
   arm64:
     machine:
-      # image: ubuntu-20.04-arm64
       image: ubuntu-2204:2023.07.1
     resource_class: arm.medium
 
-#TEST Trigger
 jobs:
   build:
     executor: arm64
@@ -26,10 +24,10 @@ jobs:
               git \
               unzip \
               xz-utils \
-              zip \
+              zip
 
       - run:
-          name: Install MEsa Dependencies
+          name: Install Mesa Dependencies
           command: |
             sudo apt-get install -y \
               libglu1-mesa
@@ -47,8 +45,8 @@ jobs:
           name: Install Flutter SDK
           command: |
             curl -LO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.0-stable.tar.xz
-            sudo tar -xf flutter_linux_3.24.0-stable.tar.xz -C /usr/local
-            echo 'export PATH="/usr/local/flutter/bin:$PATH"' >> $BASH_ENV
+            tar -xf flutter_linux_3.24.0-stable.tar.xz -C $PWD/flutter
+            echo 'export PATH="$PWD/flutter/flutter/bin:$PATH"' >> $BASH_ENV
             source $BASH_ENV
             flutter doctor
 
