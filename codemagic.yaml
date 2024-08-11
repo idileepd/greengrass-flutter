@@ -2,6 +2,7 @@ workflows:
   build_linux:
     name: Build for Linux
     max_build_duration: 60
+    instance_type: linux_x2
     environment:
       flutter: stable
       vars:
@@ -9,12 +10,12 @@ workflows:
         # TARGET_ARCH: x86_64 # Change to aarch64 for ARM 64-bit
         TARGET_ARCH: aarch64 # Change to aarch64 for ARM 64-bit
     scripts:
-      # - name: Install dependencies
-      #   script: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y lib32gcc1
-      #     sudo apt-get install -y libgtk-3-0 libblkid1 liblzma5
-      #     sudo apt-get install -y cmake ninja-build libgtk-3-dev
+      - name: Install dependencies
+        script: |
+          sudo apt-get update
+          sudo apt-get install -y lib32gcc1
+          sudo apt-get install -y libgtk-3-0 libblkid1 liblzma5
+          sudo apt-get install -y cmake ninja-build libgtk-3-dev
       - name: Build Flutter app for Linux
         script: |
           if [ "$TARGET_ARCH" == "aarch64" ]; then
