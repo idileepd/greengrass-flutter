@@ -3,7 +3,9 @@ version: 2.1
 executors:
   arm64:
     machine:
-      image: ubuntu-20.04-arm64
+      # image: ubuntu-20.04-arm64
+      image: ubuntu-2204:2023.07.1
+    resource_class: arm.medium
 
 #TEST Trigger
 jobs:
@@ -11,7 +13,8 @@ jobs:
     executor: arm64
     steps:
       - checkout
-
+      - run: uname -a
+      - run: echo "Hello, Arm!"
       - run:
           name: Install Dependencies
           command: |
