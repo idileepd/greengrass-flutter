@@ -12,7 +12,7 @@ jobs:
   build:
     executor: arm64
     steps:
-     - checkout
+      - checkout
 
       - run:
           name: Install Basic Dependencies
